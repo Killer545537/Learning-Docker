@@ -44,3 +44,22 @@ The Docker Host runs the Docker Daemon `dockerd` which does the actual work:
 ## Docker Registry/Hub
 This is a centralized repository of Docker images. Docker : Docker Hub :: Git : GitHub
 
+# Making a Docker Image
+We can create a Docker Image using a special file called `Dockerfile` and then building it using `docker build`.
+
+## Running a Ubuntu Image
+We go to Docker Hub and get the command to pull the `ubuntu` image.
+`docker pull ubuntu`
+We can now see this image in Docker Desktop under images.
+We can now **create** a container and run it in interactive mode, `docker run -it ubuntu`, the `it` flag runs it in interactive mode. The container can also be seen in Docker Desktop under containers with a random name. This gives us a very minimal Ubuntu terminal which we can't do much with anyways.
+
+## Creating Our First Dockerfile
+We create a simple docker file to run our `c++` "Hello World!" file in a container. The files are in `/hello-docker`. We use the `docker build -t hello-docker .` command (the `.` at the end is important and signals that the `Dockerfile` is right here) to build an image. The `-t` flag is used to tag the image. Finally we run the container using `docker run hello-docker` which prints out `Hello World!`. We can also run it from the GUI.
+
+## Creating a Rust API
+We first create a simple Rust API using `actix-web` which just sends out a "Hello World!" on `localhost:8080/hello`. Now, we will use a multi-stage build, meaning, we build the app in one stage and the final stage copies only the necessary output. It helps us keep images clean, small and secure.
+We also create a `.dockerignore` file which excludes files/folder to exclude from the build context (like `.gitignore`). This helps:
+- Speeds up builds
+- Reduces image size (Not much for our example since we are using a multi-stage build)
+- Avoid leaking secrets
+Again, we build the Docker Image with `docker build -t docker-api` and run the image with `docker run --name rust-api --env-file .env -p 8080:8080 docker-api`. The `--name` tag is used to name the container, `--env-file` is used to specify the env file to use and `-p` is used for port forwarding, the port inside the container is forwarded to the host machine. It works as `<host-machine-port>:<container-port>`.
