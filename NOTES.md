@@ -63,3 +63,7 @@ We also create a `.dockerignore` file which excludes files/folder to exclude fro
 - Reduces image size (Not much for our example since we are using a multi-stage build)
 - Avoid leaking secrets
 Again, we build the Docker Image with `docker build -t docker-api` and run the image with `docker run --name rust-api --env-file .env -p 8080:8080 docker-api`. The `--name` tag is used to name the container, `--env-file` is used to specify the env file to use and `-p` is used for port forwarding, the port inside the container is forwarded to the host machine. It works as `<host-machine-port>:<container-port>`.
+## Hot Reloading
+To enable hot reloading in our docker application, we can do this using,
+`docker run --name hmr -it -p 8080:8080 -v $(pwd):/app hot-reloading:latest`
+The `-v` tag here is used to mount the current directory `pwd` to the `/app` directory inside the container which makes sure that whenever the current files change, so do the ones inside the container.

@@ -1,0 +1,9 @@
+[package]
+name = "Rust-Api-HR-Docker"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+anyhow = "1.0.98"
+actix-web = "4.11.0"
+dotenvy = "0.15.7"
