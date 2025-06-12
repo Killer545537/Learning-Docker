@@ -67,3 +67,9 @@ Again, we build the Docker Image with `docker build -t docker-api` and run the i
 To enable hot reloading in our docker application, we can do this using,
 `docker run --name hmr -it -p 8080:8080 -v $(pwd):/app hot-reloading:latest`
 The `-v` tag here is used to mount the current directory `pwd` to the `/app` directory inside the container which makes sure that whenever the current files change, so do the ones inside the container.
+## Better Hot Reloading with a React App
+Since Rust is not really made for Hot Reloading, lets have a simple `Next.Js` project which we run inside this container that completely mimics our current files. We create a simple `Dockerfile` with a `run dev` command. Now we need to mount the current working directory with `$(pwd)` to the `/app` directory inside the container.
+`docker run --name Next-HOT -p 3000:3000 -v "$(pwd):/app" -v /app/node_modules next-docker:latest`
+
+# Docker Compose
+Since running all these commands in the terminal to create volumes, forward ports is too much, we have a way, called Docker Compose to automate this process.
