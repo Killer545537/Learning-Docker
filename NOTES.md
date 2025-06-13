@@ -72,4 +72,4 @@ Since Rust is not really made for Hot Reloading, lets have a simple `Next.Js` pr
 `docker run --name Next-HOT -p 3000:3000 -v "$(pwd):/app" -v /app/node_modules next-docker:latest`
 
 # Docker Compose
-Since running all these commands in the terminal to create volumes, forward ports is too much, we have a way, called Docker Compose to automate this process.
+Since running all these commands in the terminal to create volumes, forward ports is too much, we have a way, called Docker Compose to automate this process. We will build the same app as above but instead of running the `docker run` command every time, we will use Docker Compose.

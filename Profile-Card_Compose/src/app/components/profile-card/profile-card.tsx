@@ -6,7 +6,7 @@ import { ProfileContact } from "./profile-contact";
 import { ProfileProjectsPopup } from "./profile-projects-popup";
 
 const profile = {
-  name: "Sumeeet Mahajan",
+  name: "Srijan Mahajan",
   location: "Delhi, India",
   title: "Software Engineer",
   avatar: "/profile-card.jpg",
